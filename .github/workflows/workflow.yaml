@@ -89,7 +89,7 @@ jobs:
        pwd
        cd ecs-alb
        terraform apply -auto-approve
- deploy:
+  deploy:
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
