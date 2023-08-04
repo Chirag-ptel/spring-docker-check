@@ -35,14 +35,14 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-resource "aws_ecr_repository" "ecr-repo" {
-  name                 = "${var.name}-ecr"
-  image_tag_mutability = "MUTABLE"
+# resource "aws_ecr_repository" "ecr-repo" {
+#   name                 = "${var.name}-ecr"
+#   image_tag_mutability = "MUTABLE"
 
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-}
+#   image_scanning_configuration {
+#     scan_on_push = true
+#   }
+# }
 
 resource "aws_ecs_cluster""ecs-cluster" {
   name = "${var.name}-ecs-cluster"
