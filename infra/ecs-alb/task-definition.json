@@ -1,7 +1,7 @@
 [
     {
 	"name": "sample-dev-task",
-	"image": "public.ecr.aws/g4t5d3x4/reverseproxy:latest",
+	"image": "public.ecr.aws/t7b4x5g4/sample-ecr-spbt:latest",
 	"cpu": 256,
 	"memory": 512,
 	"portMappings": [{
