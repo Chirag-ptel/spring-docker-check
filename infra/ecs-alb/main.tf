@@ -57,7 +57,7 @@ resource "aws_ecs_task_definition" "ecs-task-definition" {
    requires_compatibilities = ["FARGATE"]
    cpu    = var.task_definition_cpu
    memory = var.task_definition_memory
-  container_definitions    = file("./task-definition.json")
+  container_definitions    = "${file("./task-definition.json")}"
   network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
@@ -172,11 +172,11 @@ resource "aws_lb_listener" "alb_listener" {
 
   default_action {
     type             = "forward"
-    redirect {
-      port        = "8080"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301" 
-    }
+    # redirect {
+    #   port        = "8080"
+    #   protocol    = "HTTPS"
+    #   status_code = "HTTP_301" 
+    # }
     target_group_arn = aws_lb_target_group.alb_target_group.arn
   }
 }
