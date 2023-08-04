@@ -63,7 +63,7 @@ jobs:
       run:  |
         pwd
         ls
-        cd vpc
+        cd infra/vpc
         terraform init
     - name: Terraform apply
       env:
@@ -71,7 +71,7 @@ jobs:
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run:  |
         pwd
-        cd vpc
+        cd infra/vpc
         terraform apply -auto-approve
     - name: Terraform init
       env:
@@ -80,7 +80,7 @@ jobs:
       run:  |
         pwd
         ls
-        cd ecs-alb
+        cd infra/ecs-alb
         terraform init
     - name: Terraform apply
       env:
@@ -88,9 +88,10 @@ jobs:
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run:  |
         pwd
-        cd ecs-alb
+        cd infra/ecs-alb
         terraform apply -auto-approve
   deploy:
+    needs: build
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
