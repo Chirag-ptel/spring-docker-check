@@ -48,16 +48,16 @@ resource "aws_ecs_cluster""ecs-cluster" {
   name = "${var.name}-ecs-cluster"
 }
 
-locals {
-  json_data = jsondecode(file("./task-definition.json"))
- }
+# locals {
+#   json_data = jsondecode(file("./task-definition.json"))
+#  }
 
 resource "aws_ecs_task_definition" "ecs-task-definition" {
   family                   = "${var.name}-task"
    requires_compatibilities = ["FARGATE"]
    cpu    = var.task_definition_cpu
    memory = var.task_definition_memory
-  container_definitions    = templatefile("./task-definition.json")
+  container_definitions    = file("./task-definition.json")
   network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
