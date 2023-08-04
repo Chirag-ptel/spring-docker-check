@@ -57,7 +57,7 @@ resource "aws_ecs_task_definition" "ecs-task-definition" {
    requires_compatibilities = ["FARGATE"]
    cpu    = var.task_definition_cpu
    memory = var.task_definition_memory
-  container_definitions    = "${local.json_data}"
+  container_definitions    = templatefile("${path.module}/task-definition.json")
   network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
