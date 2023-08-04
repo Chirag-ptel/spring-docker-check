@@ -35,32 +35,29 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+resource "aws_ecr_repository" "ecr-repo" {
+  name                 = "${var.name}-ecr"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}
+
 resource "aws_ecs_cluster""ecs-cluster" {
   name = "${var.name}-ecs-cluster"
 }
+
+locals {
+  json_data = jsondecode(file("./task-definition.json"))
+ }
 
 resource "aws_ecs_task_definition" "ecs-task-definition" {
   family                   = "${var.name}-task"
    requires_compatibilities = ["FARGATE"]
    cpu    = var.task_definition_cpu
    memory = var.task_definition_memory
-  container_definitions    = jsonencode([{
-    name   = "${var.name}-task"
-    image  = "public.ecr.aws/g4t5d3x4/reverseproxy:latest"
-    cpu       = 256
-    memory    = 512
-    portMappings = [
-        {
-          containerPort = 80
-          hostPort      = 80
-        }
-    ]
-  
-    environment = [{
-      name  = "SECRET_WORD"
-      value = "Hello Fraands"
-    }]
-  }])
+  container_definitions    = local.json_data
   network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
