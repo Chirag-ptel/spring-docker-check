@@ -57,7 +57,7 @@ resource "aws_ecs_task_definition" "ecs-task-definition" {
    requires_compatibilities = ["FARGATE"]
    cpu    = var.task_definition_cpu
    memory = var.task_definition_memory
-  container_definitions    = local.json_data
+  container_definitions    = "${local.json_data}"
   network_mode             = "awsvpc"
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
@@ -124,6 +124,13 @@ resource "aws_security_group" "lb_security_group" {
     cidr_blocks = ["0.0.0.0/0"] 
   }
 
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] 
+  }
+
 ingress {
     from_port   = 443
     to_port     = 443
@@ -165,26 +172,26 @@ resource "aws_lb_listener" "alb_listener" {
 
   default_action {
     type             = "forward"
-    # redirect {
-    #   port        = "443"
-    #   protocol    = "HTTPS"
-    #   status_code = "HTTP_301" 
-    # }
+    redirect {
+      port        = "8080"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301" 
+    }
     target_group_arn = aws_lb_target_group.alb_target_group.arn
   }
 }
 
 
-resource "aws_alb_listener" "alb_listener_443" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  certificate_arn = "arn:aws:acm:us-east-1:155358046204:certificate/5d08eb6f-0065-4ec5-a51f-5ee2ddb78eb5"
+# resource "aws_alb_listener" "alb_listener_443" {
+#   load_balancer_arn = aws_lb.alb.arn
+#   port              = "443"
+#   protocol          = "HTTPS"
+#   certificate_arn = "arn:aws:acm:us-east-1:155358046204:certificate/5d08eb6f-0065-4ec5-a51f-5ee2ddb78eb5"
    
-  default_action {
-    target_group_arn = aws_lb_target_group.alb_target_group.arn
-    type             = "forward"
-  }
-}
+#   default_action {
+#     target_group_arn = aws_lb_target_group.alb_target_group.arn
+#     type             = "forward"
+#   }
+# }
 
 #
