@@ -89,7 +89,7 @@ jobs:
       run:  |
         pwd
         cd infra/ecs-alb
-        terraform destroy -auto-approve -var-file="./dev/terraform.tfvars"
+        terraform apply -auto-approve -var-file="./dev/terraform.tfvars"
   deploy:
     needs: build
     name: Deploy
