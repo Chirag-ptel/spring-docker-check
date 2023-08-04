@@ -1,4 +1,5 @@
-{
+[
+    {
 	"name": "sample-dev-task",
 	"image": "public.ecr.aws/g4t5d3x4/reverseproxy:latest",
 	"cpu": 256,
@@ -8,4 +9,5 @@
 		"hostPort": 80
 	}],
     "environment": []
-}
+  }
+]
