@@ -1,7 +1,7 @@
 [
     {
 	"name": "sample-dev-task",
-	"image": "public.ecr.aws/t7b4x5g4/sample-ecr-spbt:latest",
+	"image": "public.ecr.aws/t7b4x5g4/httpd:latest",
 	"cpu": 256,
 	"memory": 512,
 	"portMappings": [{
