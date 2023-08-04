@@ -1,9 +1,9 @@
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
-    bucket = "my-s3-bucket-for-tfstate"
-    key    = "quest/dev/vpc/terraform.tfstate"
-    region = "us-east-1"
+    bucket = "spring-boot-tf-state-bucket"
+    key    = "spring-boot-tf-state-bucket/vpc/terraform.tfstate"
+    region = "ap-south-1"
   }
 }
 

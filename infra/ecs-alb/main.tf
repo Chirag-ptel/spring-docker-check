@@ -8,9 +8,9 @@ module "lib" {
 
 terraform {
   backend "s3" {
-    bucket = "my-s3-bucket-for-tfstate"
-    key    = "quest/dev/albecs/terraform.tfstate"
-    region = "us-east-1"
+    bucket = "spring-boot-tf-state-bucket"
+    key    = "spring-boot-tf-state-bucket/ecs-alb/terraform.tfstate"
+    region = "ap-south-1"
   }
 }
 

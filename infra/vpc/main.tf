@@ -4,8 +4,8 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "petadd-s3-bucket-for-tfstate"
-    key    = "dev/vpc/terraform.tfstate"
+    bucket = "spring-boot-tf-state-bucket"
+    key    = "spring-boot-tf-state-bucket/vpc/terraform.tfstate"
     region = "ap-south-1"
   }
 }
