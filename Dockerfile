@@ -2,7 +2,7 @@ FROM --platform=linux/amd64 maven:latest
 COPY pom.xml .
 COPY src src
 FROM --platform=linux/amd64 openjdk:18
-RUN mkdir target
+RUN mkdir /target
 RUN mvn clean package
 ARG JAR_FILE=target/spring-boot-2-rest-service-basic-0.0.1-SNAPSHOT.jar
 ADD ${JAR_FILE} app.jar
