@@ -19,7 +19,7 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:latest
-      - printf '{"ImageURI":"%s"}' 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:latest > imageDetail.json
-  artifacts:
-    files:
-      - imageDetail.json
+      - echo Writing image definitions file...
+      - printf '[{"name":"hello-world","imageUri":"%s"}]' 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:latest > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json
