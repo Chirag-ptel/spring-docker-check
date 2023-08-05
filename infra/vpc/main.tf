@@ -141,7 +141,6 @@ resource "aws_security_group" "private" {
  name_prefix = "my-private-sg-"
  vpc_id = aws_vpc.my-vpc.id
 
-
   ingress {
     from_port = 22
     to_port = 22
