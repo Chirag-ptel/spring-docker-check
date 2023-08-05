@@ -148,6 +148,7 @@ resource "aws_security_group" "private" {
     cidr_blocks = aws_subnet.public[*].cidr_block
   }
 
+
   egress {
     from_port = 0
     to_port = 0
