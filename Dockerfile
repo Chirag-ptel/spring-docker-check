@@ -1,12 +1,12 @@
-FROM --platform=linux/amd64 maven:latest
+FROM --platform=linux/amd64 maven:latest AS build
 COPY pom.xml ./
 COPY src ./src
 FROM --platform=linux/amd64 openjdk:18
 RUN mkdir ./target
-RUN mvn clean package
+RUN mvn  -f ./pom.xml clean package
 # ARG JAR_FILE=target/spring-boot-2-rest-service-basic-0.0.1-SNAPSHOT.jar
 # ADD ${JAR_FILE} app.jar
-COPY target/spring-boot-2-rest-service-basic-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build  ./target/spring-boot-2-rest-service-basic-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
 
