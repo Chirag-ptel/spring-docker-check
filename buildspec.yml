@@ -13,7 +13,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...          
       - docker build -t sample-springboot-image:latest .
-      - docker tag sample-springboot-image:latest public.ecr.aws/t7b4x5g4/sample-ecr-spbt:latest
+      - docker tag sample-springboot-image:latest 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:latest
   post_build:
     commands:
       - echo Build completed on `date`
