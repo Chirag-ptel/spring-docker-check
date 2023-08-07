@@ -14,6 +14,8 @@ public class Student {
 
     private String passportNumber;
 
+    private int age;
+
     public Student() {
         super();
     }
@@ -23,6 +25,7 @@ public class Student {
         this.id = id;
         this.name = name;
         this.passportNumber = passportNumber;
+        this.age = age;
     }
 
     public Long getId() {
@@ -31,6 +34,14 @@ public class Student {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getName() {
