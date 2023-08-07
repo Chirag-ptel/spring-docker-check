@@ -20,7 +20,6 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:latest
       - docker push 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name":"spring-boot-sample","imageUri":"%s"}]' 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:$IMAGE_TAG > imagedefinitions.json
