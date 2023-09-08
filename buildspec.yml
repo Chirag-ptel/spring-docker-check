@@ -9,7 +9,6 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
       # - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7b4x5g4
       # - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7b4x5g4
-      
       # aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 205477628494.dkr.ecr.ap-south-1.amazonaws.com
   build:
     commands:
