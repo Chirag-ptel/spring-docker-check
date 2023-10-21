@@ -17,7 +17,7 @@ RUN go mod download
 # Copy local code to the container image.
 COPY . ./
 
-# Build the binary.
+#  Build the binary.
 # -mod=readonly ensures immutable go.mod and go.sum in container builds.
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -v -o server
 
