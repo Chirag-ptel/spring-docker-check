@@ -2,7 +2,6 @@
 # This is based on Debian and sets the GOPATH to /go.
 FROM golang:latest as builder
 
-
 ARG TARGETOS
 ARG TARGETARCH
 
