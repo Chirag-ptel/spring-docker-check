@@ -12,6 +12,7 @@ EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
 
 
+
 # docker build -t sample-springboot-image:latest . && 
 # docker tag sample-springboot-image:latest public.ecr.aws/t7b4x5g4/sample-ecr-spbt:latest && 
 # aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7b4x5g4 && 
