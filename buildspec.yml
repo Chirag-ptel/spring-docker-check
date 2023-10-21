@@ -1,29 +1,29 @@
-version: 0.2
+# version: 0.2
 
-phases:
-  pre_build:
-    commands:
-      - echo Logging in to Amazon ECR...
-      - docker login -u AWS -p $(aws ecr get-login-password --region ap-south-1) 205477628494.dkr.ecr.ap-south-1.amazonaws.com
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
+# phases:
+#   pre_build:
+#     commands:
+#       - echo Logging in to Amazon ECR...
+#       - docker login -u AWS -p $(aws ecr get-login-password --region ap-south-1) 205477628494.dkr.ecr.ap-south-1.amazonaws.com
+#       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+#       - IMAGE_TAG=${COMMIT_HASH:=latest}
       
       
-      # - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7b4x5g4
-      # - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7b4x5g4     
-      # aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 205477628494.dkr.ecr.ap-south-1.amazonaws.com
-  build:
-    commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
-      - docker build -t sample-springboot-image:latest .
-      - docker tag sample-springboot-image:latest 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:$IMAGE_TAG
-  post_build:
-    commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:$IMAGE_TAG
-      - echo Writing image definitions file...
-      - printf '[{"name":"springboot-app","imageUri":"%s"}]' 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:$IMAGE_TAG > imagedefinitions.json
-artifacts:
-    files: imagedefinitions.json
+#       # - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7b4x5g4
+#       # - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t7b4x5g4     
+#       # aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 205477628494.dkr.ecr.ap-south-1.amazonaws.com
+#   build:
+#     commands:
+#       - echo Build started on `date`
+#       - echo Building the Docker image...          
+#       - docker build -t sample-springboot-image:latest .
+#       - docker tag sample-springboot-image:latest 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:$IMAGE_TAG
+#   post_build:
+#     commands:
+#       - echo Build completed on `date`
+#       - echo Pushing the Docker image...
+#       - docker push 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:$IMAGE_TAG
+#       - echo Writing image definitions file...
+#       - printf '[{"name":"springboot-app","imageUri":"%s"}]' 205477628494.dkr.ecr.ap-south-1.amazonaws.com/sample-ecr-spbt:$IMAGE_TAG > imagedefinitions.json
+# artifacts:
+#     files: imagedefinitions.json
